@@ -290,16 +290,10 @@ cmdAccessoryPlatform.prototype.setPowerState = function (thisSwitch, state, call
 
 	// Execute command to set state
 	exec(cmd, function (error, stdout, stderr) {
-		// Error detection
-		if (error && (state !== thisSwitch.state)) {
-			self.log("Failed to turn " + (state ? "on " : "off ") + thisSwitch.name);
-			self.log(stderr);
-		} else {
-			if (cmd)
-				self.log(thisSwitch.name + " is turned " + (state ? "on." : "off."));
+			self.log(thisSwitch.name + " is turned " + (state ? "on." : "off."));
 			thisSwitch.state = state;
 			error = null;
-		}
+		
 
 		// Restore switch after 1s if only one command exists
 		if (!notCmd && !thisSwitch.state_cmd) {
