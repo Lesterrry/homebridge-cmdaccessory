@@ -217,13 +217,13 @@ cmdAccessoryPlatform.prototype.getState = function (thisSwitch, callback) {
 
 	// Execute command to detect state
 	exec(thisSwitch.state_cmd, function (error, stdout, stderr) {
-		var state = error ? false : true;
-
-		// Error detection
-		if (stderr) {
-			self.log("Failed to determine " + thisSwitch.name + " state.");
-			self.log(stderr);
-		}
+    		var state = (stdout == "off" || stdout == "0") ? false : true;
+    		//self.log("out -" + stdout);
+    		// Error detection
+    		if (stderr) {
+      			self.log("Failed to determine " + thisSwitch.name + " state.");
+      			self.log(stderr);
+    		}
 
 		callback(stderr, state);
 	});
